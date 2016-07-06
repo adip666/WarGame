@@ -11,10 +11,11 @@ public class Mover : MonoBehaviour {
     }
 IEnumerator Destroyer()
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(1f);
         Destroy(gameObject);
     }
-	
+    
+
 
 
 }

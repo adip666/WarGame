@@ -50,6 +50,9 @@ public class ZombiesControll : MonoBehaviour {
         {
             Destroy(gameObject);
             Instantiate(BloodFX, transform.position, transform.rotation);
+            if(coll.tag == "Ammo") {
+                Destroy(coll.gameObject);
+            }
         }
     }
 }

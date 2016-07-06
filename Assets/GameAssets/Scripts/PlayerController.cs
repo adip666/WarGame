@@ -9,7 +9,14 @@ public class PlayerController : MonoBehaviour {
     public Transform ShotSpawn;
     public int Ammo;
     public Text InfoAmmo;
-	// Use this for initialization
+    public int HP = 100;
+
+    GameObject MainCamera;
+
+    void Awake()
+    {
+        MainCamera = GameObject.FindWithTag("MainCamera");
+    }
 	
    public void Shot()
     {
@@ -27,4 +34,19 @@ public class PlayerController : MonoBehaviour {
     {
         InfoAmmo.text = Ammo.ToString();
     }
+    void OnTriggerEnter(Collider coll)
+    {
+        if (coll.tag == "Ammo")
+        {
+            Destroy(coll.gameObject);
+            HP -= 10;
+            if (HP==0)
+            {
+                MainCamera.transform.parent=null;
+                Destroy(gameObject);
+            }
+
+        }
+    }
+   
 }
