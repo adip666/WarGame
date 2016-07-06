@@ -4,10 +4,9 @@ using System.Collections;
 public class EnemyShooter : MonoBehaviour {
     public GameObject Bolt;
     public Transform ShotSpawn;
-    public Transform target;
     public float fireRate;
-    
 
+    Transform target;
     bool Fire;
     float nextFire;
     // Use this for initialization
