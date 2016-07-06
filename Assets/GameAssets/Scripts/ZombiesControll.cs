@@ -4,11 +4,13 @@ using System.Collections;
 public class ZombiesControll : MonoBehaviour {
     public Transform Start, End;
     NavMeshAgent Agent;
+    public GameObject BloodFX;
     
     public bool isEnd;
 	void Awake()
     {
         Agent = GetComponent<NavMeshAgent>();
+       // BloodFX = GetComponentInChildren<ParticleSystem>();
     }
 	void Update () {
         
@@ -47,6 +49,7 @@ public class ZombiesControll : MonoBehaviour {
         if (coll.tag == "Player"|| coll.tag == "Ammo")
         {
             Destroy(gameObject);
+            Instantiate(BloodFX, transform.position, transform.rotation);
         }
     }
 }
