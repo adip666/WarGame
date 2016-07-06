@@ -12,10 +12,12 @@ public class PlayerController : MonoBehaviour {
     public int HP = 100;
 
     GameObject MainCamera;
+    EnergyBar InfoHP;
 
     void Awake()
     {
         MainCamera = GameObject.FindWithTag("MainCamera");
+        InfoHP = GameObject.Find("Filled Bar").GetComponent<EnergyBar>();
     }
 	
    public void Shot()
@@ -36,10 +38,11 @@ public class PlayerController : MonoBehaviour {
     }
     void OnTriggerEnter(Collider coll)
     {
-        if (coll.tag == "Ammo")
+        if (coll.tag == "AmmoEnemy")
         {
             Destroy(coll.gameObject);
             HP -= 10;
+            InfoHP.SetValueCurrent(HP);
             if (HP==0)
             {
                 MainCamera.transform.parent=null;

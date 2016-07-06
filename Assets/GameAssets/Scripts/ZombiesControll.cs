@@ -46,7 +46,7 @@ public class ZombiesControll : MonoBehaviour {
     }
     void OnTriggerEnter(Collider coll)
     {
-        if (coll.tag == "Player"|| coll.tag == "Ammo")
+        if (coll.tag == "Player"|| coll.tag == "Ammo" || coll.tag == "AmmoEnemy")
         {
             Destroy(gameObject);
             Instantiate(BloodFX, transform.position, transform.rotation);
