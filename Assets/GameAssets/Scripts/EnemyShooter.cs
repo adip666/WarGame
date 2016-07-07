@@ -9,6 +9,7 @@ public class EnemyShooter : MonoBehaviour {
     Transform target;
     bool Fire;
     float nextFire;
+
     // Use this for initialization
     void Awake () {
         target = GameObject.FindWithTag("Player").GetComponent<Transform>();
@@ -29,6 +30,7 @@ public class EnemyShooter : MonoBehaviour {
         {
             // Destroy(gameObject);
             Fire = true;
+            
         }
     
     }

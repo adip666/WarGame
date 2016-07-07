@@ -2,44 +2,78 @@
 using System.Collections;
 
 public class ZombiesControll : MonoBehaviour {
-    public Transform Start, End;
-    NavMeshAgent Agent;
+    public bool isEat;
     public GameObject BloodFX;
+    public string type;
     
-    public bool isEnd;
-	void Awake()
+    bool isEnd;
+    public NavMeshAgent Agent;
+    Animator animator;
+    public Transform StartMove, EndMove;
+
+    void Awake()
     {
         Agent = GetComponent<NavMeshAgent>();
-       // BloodFX = GetComponentInChildren<ParticleSystem>();
+        animator = GetComponentInChildren<Animator>();
+
+    }
+    void Start()
+    {
+        if(type == "Blue")
+        {
+            StartMove = GameObject.Find("StartZombieBlue").GetComponent<Transform>();
+            EndMove = GameObject.Find("EndZombieBlue").GetComponent<Transform>();
+
+        }
+        if (type == "Grey")
+        {
+            StartMove = GameObject.Find("StartZombieGrey").GetComponent<Transform>();
+            EndMove = GameObject.Find("endZombieGrey").GetComponent<Transform>();
+
+        }
+        if (type == "Green")
+        {
+            StartMove = GameObject.Find("StartZombieGreen").GetComponent<Transform>();
+            EndMove = GameObject.Find("EndZombieGreen").GetComponent<Transform>();
+
+        }
     }
 	void Update () {
-        
-        Walk();
-        CheckPosition();
-        
-       
-	}
+
+        if (isEat)
+        {
+            animator.SetBool("Eat", true);
+
+        }
+        else
+        {
+            Walk();
+            CheckPosition();
+        }
+
+
+    }
     public void Walk()
     {
         if (!isEnd)
         {
-            Agent.SetDestination(End.position);
+            Agent.SetDestination(EndMove.position);
             
         }
         else
         {
-            Agent.SetDestination(Start.position);
+            Agent.SetDestination(StartMove.position);
             
         }
     }
     void CheckPosition()
     {
         
-        if (transform.position.z == End.position.z && transform.position.x == End.position.x)
+        if (transform.position.z == EndMove.position.z && transform.position.x == EndMove.position.x)
         {
             isEnd = true;
         }
-        else if(transform.position.z == Start.position.z && transform.position.x == Start.position.x)
+        else if(transform.position.z == StartMove.position.z && transform.position.x == StartMove.position.x)
         {
             isEnd = false;
         }
@@ -50,7 +84,7 @@ public class ZombiesControll : MonoBehaviour {
         {
             Destroy(gameObject);
             Instantiate(BloodFX, transform.position, transform.rotation);
-            if(coll.tag == "Ammo") {
+            if(coll.tag == "Ammo"|| coll.tag == "AmmoEnemy") {
                 Destroy(coll.gameObject);
             }
         }
