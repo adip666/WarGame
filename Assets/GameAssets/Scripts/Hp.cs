@@ -23,6 +23,7 @@ public class Hp : MonoBehaviour {
         {
             Debug.Log("KOLIZJA");
             Controler.HP += ValueHP;
+            Controler.UpdateInfoHP();
             Destroy(gameObject);
         }
     }

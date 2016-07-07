@@ -51,5 +51,9 @@ public class PlayerController : MonoBehaviour {
 
         }
     }
+    public void UpdateInfoHP()
+    {
+        InfoHP.SetValueCurrent(HP);
+    }
    
 }
